@@ -5,25 +5,52 @@ import pandas as pd
 
 # Using pathlib, create a `db_path` variable
 # that points to the absolute path for the `employee_events.db` file
-#### YOUR CODE HERE
+db_path = Path("python-package/employee_events/employee_events.db").resolve()
 
 
 # OPTION 1: MIXIN
 # Define a class called `QueryMixin`
 class QueryMixin:
+    # Method to open a connection to the database
+    def open_connection(self):
+        if not db_path.exists():
+            raise FileNotFoundError(f"Database file not found at {db_path}")
+        try:
+            conn = connect(db_path)
+            return conn
+        except Exception as e:
+            print(f"Error opening connection: {e}")
+            return None
+    
+    # Method to close the database connection
+    def close_connection(self, conn):
+        if conn:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Error closing connection: {e}")
     
     # Define a method named `pandas_query`
     # that receives an sql query as a string
     # and returns the query's result
     # as a pandas dataframe
-    #### YOUR CODE HERE
+    def pandas_query(self, sql_query: str):
+        conn = self.open_connection()
+        df = pd.read_sql_query(sql_query, conn)
+        self.close_connection(conn)
+        return df   
 
     # Define a method named `query`
     # that receives an sql_query as a string
     # and returns the query's result as
     # a list of tuples. (You will need
     # to use an sqlite3 cursor)
-    #### YOUR CODE HERE
+    def query(self, sql_query: str):
+        conn = self.open_connection()
+        cursor = conn.cursor()
+        result = cursor.execute(sql_query).fetchall()
+        self.close_connection(conn)
+        return result
     
 
  
