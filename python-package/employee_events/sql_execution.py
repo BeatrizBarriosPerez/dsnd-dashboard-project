@@ -5,7 +5,7 @@ import pandas as pd
 
 # Using pathlib, create a `db_path` variable
 # that points to the absolute path for the `employee_events.db` file
-db_path = Path("python-package/employee_events/employee_events.db").resolve()
+db_path = Path(__file__).resolve().parent / 'employee_events.db'
 
 
 # OPTION 1: MIXIN
@@ -20,7 +20,7 @@ class QueryMixin:
             return conn
         except Exception as e:
             print(f"Error opening connection: {e}")
-            return None
+            raise e
     
     # Method to close the database connection
     def close_connection(self, conn):
@@ -36,9 +36,11 @@ class QueryMixin:
     # as a pandas dataframe
     def pandas_query(self, sql_query: str):
         conn = self.open_connection()
-        df = pd.read_sql_query(sql_query, conn)
-        self.close_connection(conn)
-        return df   
+        try:
+            df = pd.read_sql_query(sql_query, conn)
+            return df
+        finally:
+            self.close_connection(conn)  
 
     # Define a method named `query`
     # that receives an sql_query as a string
@@ -47,12 +49,12 @@ class QueryMixin:
     # to use an sqlite3 cursor)
     def query(self, sql_query: str):
         conn = self.open_connection()
-        cursor = conn.cursor()
-        result = cursor.execute(sql_query).fetchall()
-        self.close_connection(conn)
-        return result
-    
-
+        try:
+            cursor = conn.cursor()
+            result = cursor.execute(sql_query).fetchall()
+            return result
+        finally:
+            self.close_connection(conn)
  
  # Leave this code unchanged
 def query(func):
