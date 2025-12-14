@@ -61,7 +61,7 @@ class Header(BaseComponent):
         # Using the model argument for this method
         # return a fasthtml H1 objects
         # containing the model's name attribute
-        return H1(f"{model.name.title()} Dashboard")
+        return H1(f"{model.name.title()} Performance")
           
 
 # Create a subclass of base_components/MatplotlibViz
@@ -165,8 +165,10 @@ class BarChart(MatplotlibViz):
         # Initialize a matplotlib subplot
         fig, ax = plt.subplots()
         
-        # Run the following code unchanged
-        ax.barh([''], [pred])
+        # Using colormap `RdYlGn` as a color scale, according to the Rubric suggestions
+        color_map = plt.cm.RdYlGn(1 - pred)
+        ax.barh([''], [pred], color=color_map)
+
         ax.set_xlim(0, 1)
         ax.set_title('Predicted Recruitment Risk', fontsize=20)
         
