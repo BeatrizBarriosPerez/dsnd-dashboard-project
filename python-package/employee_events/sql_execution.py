@@ -56,9 +56,7 @@ class QueryMixin:
         finally:
             self.close_connection(conn)
 
- # Leave this code unchanged
-
-
+# Leave this code unchanged
 def query(func):
     """
     Decorator that runs a standard sql execution

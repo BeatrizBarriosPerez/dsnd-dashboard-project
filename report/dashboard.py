@@ -1,8 +1,8 @@
-from fasthtml.common import *
+from fasthtml.common import * # noqa: F403
 import matplotlib.pyplot as plt
 
 # Import QueryBase, Employee, Team from employee_events
-from employee_events import QueryBase, Employee, Team
+from employee_events import QueryBase, Employee, Team # noqa: F401
 
 # import the load_model function from the utils.py file
 from utils import load_model
@@ -62,7 +62,7 @@ class Header(BaseComponent):
         # Using the model argument for this method
         # return a fasthtml H1 objects
         # containing the model's name attribute
-        return H1(f"{model.name.title()} Performance")
+        return H1(f"{model.name.title()} Performance") # noqa: F405
 
 
 # Create a subclass of base_components/MatplotlibViz
@@ -189,7 +189,7 @@ class Visualizations(CombinedComponent):
     children = [LineChart(), BarChart()]
 
     # Leave this line unchanged
-    outer_div_type = Div(cls='grid')
+    outer_div_type = Div(cls='grid') # noqa: F405
 
 # Create a subclass of base_components/DataTable
 # called `NotesTable`
@@ -241,7 +241,7 @@ class Report(CombinedComponent):
 
 
 # Initialize a fasthtml app
-app, route = fast_app()
+app, route = fast_app() # noqa: F405
 
 # Initialize the `Report` class
 report = Report()
@@ -319,4 +319,4 @@ async def update_data(r):
         return RedirectResponse(f"/team/{id}", status_code=303)
 
 
-serve()
+serve() # noqa: F405

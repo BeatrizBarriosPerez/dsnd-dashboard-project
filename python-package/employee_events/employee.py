@@ -3,7 +3,7 @@ from .query_base import QueryBase
 
 # Import dependencies needed for sql execution
 # from the `sql_execution` module
-from .sql_execution import QueryMixin
+from .sql_execution import QueryMixin # noqa: F401
 
 # Define a subclass of QueryBase
 # called Employee
@@ -29,7 +29,7 @@ class Employee(QueryBase):
         # 2. The employee's id
         # This query should return the data
         # for all employees in the database
-        sql = f"""
+        sql = """
             SELECT first_name || ' ' || last_name as full_name  , employee_id
             FROM employee
         """
