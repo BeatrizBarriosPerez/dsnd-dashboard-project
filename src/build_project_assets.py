@@ -7,7 +7,7 @@ import json
 from sqlite3 import connect
 from datetime import timedelta, date
 from sklearn.linear_model import LogisticRegression
-from scipy.stats import norm, expon, uniform, skewnorm # noqa: F401
+from scipy.stats import norm, expon, uniform, skewnorm  # noqa: F401
 
 
 cwd = Path('.').resolve()
@@ -25,12 +25,12 @@ def left_skew(a, loc, size=500):
 profiles = {
     'good': {
         'positive': lambda: norm.rvs(loc=norm.rvs(4), scale=1).astype(int),
-        'negative': lambda: expon.rvs(loc=0, scale=np.random.choice([.5, 1])).astype(int), # noqa: F501
+        'negative': lambda: expon.rvs(loc=0, scale=np.random.choice([.5, 1])).astype(int),  # noqa: E501
         'chance': .5
     },
     'normal': {
         'positive': lambda: norm.rvs(loc=norm.rvs(3), scale=1).astype(int),
-        'negative': lambda: norm.rvs(loc=2, scale=np.random.choice([.5, 1, 2, 3])).astype(int), # noqa: F501
+        'negative': lambda: norm.rvs(loc=2, scale=np.random.choice([.5, 1, 2, 3])).astype(int),  # noqa: E501
         'chance': .15
     },
     'poor': {
@@ -40,7 +40,7 @@ profiles = {
     },
     'chaotic_good': {
         'positive': lambda: left_skew(-1000, 5).astype(int),
-        'negative': lambda: np.random.choice([0, np.random.choice([50, 200])], p=[.98, .02]), # noqa: F501
+        'negative': lambda: np.random.choice([0, np.random.choice([50, 200])], p=[.98, .02]),  # noqa: E501
         'chance': .2
     },
     'chotic_bad': {

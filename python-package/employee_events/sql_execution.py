@@ -56,6 +56,7 @@ class QueryMixin:
         finally:
             self.close_connection(conn)
 
+
 # Leave this code unchanged
 def query(func):
     """

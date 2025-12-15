@@ -16,8 +16,8 @@ matplotlib.rcParams['savefig.format'] = 'png'
 
 def matplotlib2fasthtml(func):
     '''
-    Copy of https://github.com/koaning/fh-matplotlib, 
-    which is currently hardcoding the image format as 
+    Copy of https://github.com/koaning/fh-matplotlib,
+    which is currently hardcoding the image format as
     jpg. png or svg is needed here.
     '''
     def wrapper(*args, **kwargs):

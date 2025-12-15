@@ -2,7 +2,7 @@
 from .query_base import QueryBase
 
 # Import dependencies for sql execution
-from .sql_execution import QueryMixin # noqa: F401
+from .sql_execution import QueryMixin  # noqa: F401
 
 # Create a subclass of QueryBase
 # called  `Team`
