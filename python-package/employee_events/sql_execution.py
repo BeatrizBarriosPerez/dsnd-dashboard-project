@@ -21,7 +21,7 @@ class QueryMixin:
         except Exception as e:
             print(f"Error opening connection: {e}")
             raise e
-    
+
     # Method to close the database connection
     def close_connection(self, conn):
         if conn:
@@ -29,7 +29,7 @@ class QueryMixin:
                 conn.close()
             except Exception as e:
                 print(f"Error closing connection: {e}")
-    
+
     # Define a method named `pandas_query`
     # that receives an sql query as a string
     # and returns the query's result
@@ -40,7 +40,7 @@ class QueryMixin:
             df = pd.read_sql_query(sql_query, conn)
             return df
         finally:
-            self.close_connection(conn)  
+            self.close_connection(conn)
 
     # Define a method named `query`
     # that receives an sql_query as a string
@@ -55,8 +55,10 @@ class QueryMixin:
             return result
         finally:
             self.close_connection(conn)
- 
+
  # Leave this code unchanged
+
+
 def query(func):
     """
     Decorator that runs a standard sql execution
@@ -71,5 +73,5 @@ def query(func):
         result = cursor.execute(query_string).fetchall()
         connection.close()
         return result
-    
+
     return run_query

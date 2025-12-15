@@ -6,19 +6,21 @@ from .sql_execution import QueryMixin
 
 # Create a subclass of QueryBase
 # called  `Team`
+
+
 class Team(QueryBase):
 
     # Set the class attribute `name`
     # to the string "team"
     name = "team"
 
-
     # Define a `names` method
     # that receives no arguments
     # This method should return
     # a list of tuples from an sql execution
+
     def names(self):
-        
+
         # Query 5
         # Write an SQL query that selects
         # the team_name and team_id columns
@@ -49,7 +51,6 @@ class Team(QueryBase):
         """
         return self.query(sql)
 
-
     # Below is method with an SQL query
     # This SQL query generates the data needed for
     # the machine learning model.
@@ -57,7 +58,7 @@ class Team(QueryBase):
     # so when it is called, a pandas dataframe
     # is returns containing the execution of
     # the sql query
-    
+
     def model_data(self, id):
 
         sql = f"""
@@ -73,4 +74,3 @@ class Team(QueryBase):
                    )
                 """
         return self.pandas_query(sql)
-    
